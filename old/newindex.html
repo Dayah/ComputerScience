@@ -1,0 +1,408 @@
+<html>
+<head>
+<title>Department of Computer Science at the University of Tennessee, Knoxville</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<script language="javascript">
+
+<!--
+
+function flip(imgName) {
+// This controls all of the overs and switching of images.
+// CALLED FROM: 'mouseovers'
+
+//      turn off last image
+        if (lastImg != "null") {
+                swapImage(lastImg,lastImg,'off');
+        }
+
+//      turn on selected nav
+        swapImage (imgName, imgName, 'on');
+
+//      swap out rollover image
+        rollover = "sub_" + imgName;
+        swapImage (imgName, 'submenu', 'menu');
+
+//      set last image flag ready for next rollover
+        lastImg = imgName;
+}
+
+
+function restoreMain(){
+// set the main menu image back to the photos and turn off the last main nav rollover
+// CALLED FROM: adjacent 'mouseovers'
+
+//      turn off last image
+        if (lastImg != "null") {
+                swapImage(lastImg,lastImg,'off');
+        }
+
+//      switch back to photos
+        swapImage('sub','main','off');
+
+//      reset submenu flag
+        option = -1;
+}
+
+
+function link(x){
+// go to selcted link URL from selected submenu option (ONLY if it exists)
+
+        if ( option > -1) {
+                jump = eval( 'menu' + option + '[x]');
+                if ( jump != 'null') {
+                        document.location = jump;
+                }
+        }
+}
+
+
+function makeArray(nitems) {
+        this.length = nitems;
+        for (var i = 0; i < nitems; i++) {
+                this[i] = 'null';
+        }
+        return this;
+}
+
+
+function checkPhoto(x) {
+//  Decide whether you are at the bottom of the menu or not. 
+//  If you are then restore the photos, otherwise show the URL for the current link.
+
+        if (x <= maxMenu && option >= 0) {
+                linkTxt = eval( 'menu' + option + '[x]');
+                if (linkTxt != 'null') {
+                        window.status = linkTxt;
+                } else {
+                        window.status = '';
+                }
+        } else {
+                window.status = '';
+                restoreMain()
+        }
+}
+
+
+function setStatus(ndx){
+        if (option >= 0 ) {
+
+          statString = eval ('menu' + option + '[' + ndx + ']');
+
+          if (statString != "null") {
+                window.status = statString;
+          } else {
+                window.status = '';
+          }
+
+        }
+}
+
+function nothing(){}
+// null function
+
+function setImages(){
+        if (document.images) {
+
+                pugrad_on=new Image(); pugrad_on.src="info_for/prosp-ugrad.gif";
+                pugrad_off=new Image(); pugrad_off.src="info_for/prosp-ugrad.gif";
+                pugrad_menu=new Image(); pugrad_menu.src="image_slices/list_prosp-ugrad.gif";
+
+                ptrans_on=new Image(); ptrans_on.src="info_for/prosp-trans.gif";
+                ptrans_off=new Image(); ptrans_off.src="info_for/prosp-trans.gif";
+                ptrans_menu=new Image(); ptrans_menu.src="image_slices/list_transfers.gif";
+
+                pgrad_on=new Image(); pgrad_on.src="info_for/prosp-grad.gif";
+                pgrad_off=new Image(); pgrad_off.src="info_for/prosp-grad.gif";
+                pgrad_menu=new Image(); pgrad_menu.src="image_slices/list_prosp-grad.gif";
+
+                ugrad_on=new Image(); ugrad_on.src="info_for/curr-ugrad.gif";
+                ugrad_off=new Image(); ugrad_off.src="info_for/curr-ugrad.gif";
+                ugrad_menu=new Image(); ugrad_menu.src="image_slices/list_curr-ugrad.gif";
+
+                grad_on=new Image(); grad_on.src="info_for/curr-grad.gif";
+                grad_off=new Image(); grad_off.src="info_for/curr-grad.gif";
+                grad_menu=new Image(); grad_menu.src="image_slices/list_curr-grad.gif";
+
+		peers_on=new Image(); peers_on.src="info_for/peers.gif";
+		peers_off=new Image(); peers_off.src="info_for/peers.gif"
+		peers_menu=new Image(); peers_menu.src="image_slices/list_peers.gif";
+
+	industry_on=new Image(); industry_on.src="info_for/industry.gif";
+	industry_off=new Image(); industry_off.src="info_for/industry.gif"
+	industry_menu=new Image(); industry_menu.src="image_slices/list_industry.gif";  
+
+	gov_on=new Image(); gov_on.src="info_for/gov.gif"; 
+	gov_off=new Image(); gov_off.src="info_for/gov.gif";
+	gov_menu= new Image(); gov_menu.src="image_slices/list_gov.gif";
+
+
+                loaded=1;
+        }
+}
+
+
+function swapImage(imgName, target, state) {
+
+//      **// AUTHOR - MARTYN GREEN //**--
+//      This function allows any rollover to swap out any other named image on a page.
+//      A specific naming convention mut be used when declaring images in a function:
+//              [name]_off - for the default state
+//              [name]_on - for the rollover state
+//      Additional states can be called from the mouseOver event as required.
+//
+//      imgName : the name of the image as set in the function setImages. 
+//      target  : the named image on the page (specified in the img tag).
+//      state   : declares which state of the image to display [on|off].
+
+        if (document.images && loaded==1)
+        {
+                imgSwap = eval (imgName + "_" + state + ".src");
+                document[target].src = imgSwap;
+        }
+}
+
+
+// define global variables
+        var lastImg = "null";           // flag which remembers last nav rolled over - so it can be turned off!
+        var option = -1;                // flag which remembers which submenu is currently being displayed
+        var loaded = 0;                 // flag indicating that load operation has completed - and all rollovers are set up
+        var maxMenu = 16;               // the index of the last menu item in the list (maximum permitted value is currently 19)
+                                        // **NOTE** I have increased the value of the maxMenu variable by one to improve usability
+
+// setup control array for links
+
+        nmenu = 10;                      // number of main menu items
+        nsubmenu = 17;                  // number of levels on sub-menu grid
+
+        menu0 = new makeArray(nsubmenu);        
+        menu1 = new makeArray(nsubmenu);        
+        menu2 = new makeArray(nsubmenu);        
+        menu3 = new makeArray(nsubmenu);        
+        menu4 = new makeArray(nsubmenu);        
+        menu5 = new makeArray(nsubmenu);        
+        menu6 = new makeArray(nsubmenu);
+	menu7 = new makeArray(nsubmenu);
+	menu8 = new makeArray(nsubmenu);
+	menu9 = new makeArray(nsubmenu); 
+
+//********** IMPORTANT **********************************************************************
+// Below is the array of links which directs users to the correct page from the rollover menus
+// Make sure you update these entries to the correct web page names (eg 'message.html')
+// before launching the site.
+//*******************************************************************************************
+
+//[0]  HOME links (null)
+
+//[1]  pugrad links (Prospective Undergrad)
+        menu1[0] = 'http://www.cs.utk.edu/highschool/topten.html';
+        menu1[1] = 'http://www.cs.utk.edu/highschool/csdef.html';
+        menu1[2] = 'http://www.cs.utk.edu/highschool/whatcanIdo.html';
+        menu1[3] = 'http://www.cs.utk.edu/highschool/statistics.html';
+        menu1[4] = 'http://www.cs.utk.edu/academic/UGInfo_ho.html/';
+        menu1[5] = 'http://www.acad.utk.edu/honors/';
+        menu1[6] = 'http://www.cs.utk.edu/news/Newsletter/progstudy.htnml';
+        menu1[7] = 'http://www.utk.edu/experience/';
+        menu1[8] = 'http://www.utk.edu/experience/';
+
+//[2]  pgrad LINKS (Prospective Graduate)
+	menu2[0] = 'http://www.cs.utk.edu/academic/GradAdmAsst.html';
+        menu2[1] = 'http://www.cs.utk.edu/academic/GradAdmAsst.html#assistanceships';
+        menu2[2] = 'http://www.cs.utk.edu/academic/fellowshiputk.html';
+        menu2[3] = 'http://www.cs.utk.edu/academic/GradInfo_ho.html';
+        menu2[4] = 'http://www.cs.utk.edu/academic/GradAdmAsst.html#forms';
+//      menu2[5] = 'null';
+//      menu2[6] = 'null';
+//      menu2[7] = 'null';
+//      menu2[8] = 'null';
+
+//[3] ptrans LINKS (Prospective Transfers)
+        menu3[0] = 'http://www.cs.utk.edu/academic/UGAdmTrans.html';
+//      menu3[1] = 'null';
+//      menu3[2] = 'null';
+//      menu3[3] = 'null';
+//      menu3[4] = 'null';
+//      menu3[5] = 'null';
+//      menu3[6] = 'null';
+//      menu3[7] = 'null';
+//      menu3[8] = 'null';
+
+//[4] ugrad LINKS  
+	menu4[0] = 'http://www.cs.utk.edu/academic/UGInfo_ho.html';
+        menu4[1] = 'http://www.cs.utk.edu/news/Newsletter/progstudy.html';
+        menu4[2] = 'http://www.cs.utk.edu/academic/CourseDescr.html#descriptions';
+        menu4[3] = 'http://www.cs.utk.edu/%7Eacm/';
+        menu4[4] = 'http://ur.utenn.edu/undergrad/';
+//      menu4[5] = 'null';
+//      menu4[6] = 'null';
+//      menu4[7] = 'null';
+//      menu4[8] = 'null';
+   
+//[5] grad LINKS
+	menu5[0] = 'http://www.cs.utk.edu/%7Ejgregor/GradComm-info.html';
+        menu5[1] = 'http://www.cs.utk.edu/academic/GradInfo_ho.html';
+        menu5[2] = 'http://www.cs.utk.edu/academic/CourseDescr.html#descriptions';
+        menu5[3] = 'http://web.utk.edu/%7Egsinfo/toc.htm';
+//      menu5[4] = 'null';
+//      menu5[5] = 'null';
+//      menu5[6] = 'null';
+//      menu5[7] = 'null';
+//      menu5[8] = 'null';
+
+//[6] peers LINKS
+	menu6[0] = 'http://www.cs.utk.edu/research/facultyinterests.html';
+        menu6[1] = '#';
+        menu6[2] = 'http://www.cs.utk.edu/%7Elibrary/TechReports.html';
+        menu6[3] = '#';
+//      menu6[4] = 'null';
+//      menu6[5] = 'null';
+//      menu6[6] = 'null';
+//      menu6[7] = 'null';
+//      menu6[8] = 'null';
+
+//[7] industry LINKS
+      menu7[0] = 'http://www.cs.utk.edu/research/facultyinterests.html';
+      menu7[1] = '#';
+      menu7[2] = 'http://www.cs.utk.edu/%7Ecs460.is&amp;r/cgi-bin/group2/';
+//    menu7[3] = 'null';
+//    menu7[4] = 'null';
+//    menu7[5] = 'null';
+//    menu7[6] = 'null';
+//    menu7[7] = 'null';
+//    menu7[8] = 'null';
+
+//[8] gov LINKS
+      menu8[0] = 'http://www.cs.utk.edu/research/facultyinterests.html';
+      menu8[1] = '#';
+      menu8[2] = 'http://www.cs.utk.edu/%7Ecs460.is&amp;r/cgi-bin/group2/';
+//    menu8[3] = 'null';
+//    menu8[4] = 'null';
+//    menu8[5] = 'null';
+//    menu8[6] = 'null';
+//    menu8[7] = 'null';
+//    menu8[8] = 'null';
+ 
+
+//-->
+
+</script>
+</head>
+
+<body bgcolor="#ffffff" topmargin="0" leftmargin="0" bottommargin="0" rightmargin="0" marginwidth="0" marginheight="0" link="#333399" vlink="#333399" onLoad="setImages()">
+
+
+<!--subnav imagemap-->
+
+<map name="submenuMap">
+  <area shape="rect" coords="36,5,261,26"    href="javascript:link(0)" onMouseOver="setStatus(0); return true;" omMouseOut="window.status='';return true;">
+  <area shape="rect" coords="119,26,260,44"   href="javascript:link(1)" onMouseOver="setStatus(1); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="89,43,260,65"   href="javascript:link(2)" onMouseOver="setStatus(2); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="147,64,259,86"   href="javascript:link(3)" onMouseOver="setStatus(3); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="88,84,258,107"   href="javascript:link(4)" onMouseOver="setStatus(4); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="169,106,258,126"   href="javascript:link(5)" onMouseOver="setStatus(5); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="127,125,258,146"   href="javascript:link(6)" onMouseOver="setStatus(6); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="161,145,257,166"  href="javascript:link(7)" onMouseOver="setStatus(7); return true;" omMouseOut="window.status='';return true">
+  <area shape="rect" coords="0,110,220,122" href="javascript:link(8)" onMouseOver="setStatus(8); return true;" omMouseOut="window.status='';return true">
+</map>
+
+
+
+<!-- main text content -->
+<table border=0 cellpadding=0 cellspacing=0 width=720 height=460>
+<tr>
+<td align="center" bgcolor="#ff9900" width="166" height="100">
+<font size="2" color="#333399" face="arial, san-serif"> 
+<a href="http://www.cs.utk.edu/news">Friday Memo</a><br><br>
+<a href="http://www.cs.utk.edu/news/newsflash">Newsflash</a><br><br>
+<a href="http://www.cs.utk.edu/info">Vital Inforamation</a><br></font>
+</td>
+<!-- End gold Newsflash cell -->
+
+<td rowspan = 2 bgcolor="#333399" width="554 height="386">
+<!-- this table contains the images inside the blue field -->
+<table border=0 cellpadding=0 cellspacing=0 width=554>
+<tr>
+<td>
+<img src="blue_box/bluebox-01-01.gif" width="276" height="100" border="0"></td> 
+<td> 
+<img src="blue_box/bluebox-01-02.gif" width="278" height="170" border="0"></td>
+<tr>
+	<td> <img src="image_slices/list_industry.gif" width="276" height="170" name="submenu" usemap="#submenuMap" border=0"></td>
+<td>
+<img src="blue_box/bluebox-02-02.gif" width="278" height="170" border="0">
+</td>
+</tr>
+<tr> 
+<td colspan=2><img src="blue_box/blue-bottom.gif" width="554" height="116" border="0" usemap="#utk-home"></td>
+</tr>
+</table>
+<!-- end blue field table -->
+</td>
+
+</tr>
+
+<!-- navigation sub table -->
+<tr>
+<td bgcolor="#ffffff" height="286">
+<table border=0 cellpadding=0 cellspacing=0 width=166>
+        <tr>
+	<td>
+	<img src="info_for/info-for-01-01.gif" width="166" height="122" border="0"></td>
+	</tr>
+	<tr>
+          <td><a HREF="http://www.cs.utk.edu/highschool" onMouseOver="option=1; flip('pugrad'); window.status='Choose an item from the sub-menu';return true;" onMouseOut="window.status='';return true;"><img src="info_for/prosp-ugrad.gif" width="166" height="15" border="0" name="pugrad"></a></td>
+</tr>
+<tr>
+          <td><a HREF="http://www.cs.utk.edu/academic" onMouseOver="option=2; flip('pgrad'); window.status='Choose an item from the sub-menu';return true;" onMouseOut="window.status='';return true;"><img src=
+"info_for/prosp-grad.gif"
+ width="166" height="18" border="0" name="pgrad"></a></td>
+</tr>
+<tr>
+          <td><a HREF="http://www.cs.utk.edu/academic/GradAdmAsst.html" onMouseOver="option=3; flip('ptrans'); window.status='Choose an item from the sub-menu';return true;" onMouseOut="window.status='';return true;">
+<img src="info_for/prosp-trans.gif" width="166" height="17" border="0" name="ptrans"></a></td>
+</tr>
+<tr>
+<td> 
+	<img src="info_for/info-for-05-01.gif" width="166" height="19" border="0"></td>
+</tr> 
+<tr> 
+            <td><a HREF="http://www.cs.utk.edu/timetables/fall00/" onMouseOver="option=4; flip('ugrad'); window.status='Choose an item from the sub-menu'; return true;" onMouseOut="window.status'';return true;"><img src="info_for/curr-ugrad.gif" width="166" height="17" border="0" name="ugrad"></a></td>
+</tr>
+<tr>
+<td><a HREF="http://www.cs.utk.edu/timetables/fall00/" onMouseOver="option=5; flip('grad'); window.status='Choose an item from the sub-menu'; return true;" onMouseOut="window.status'';return true;"><img src="info_for/curr-grad.gif" width="166" height="19" border="0" name="grad"></a></td>
+</tr>
+<tr>
+<td><a HREF="http://www.cs.utk.edu/timetables/fall00/" onMouseOver="option=6; flip('peers'); window.status='Choose an item from the sub-menu'; return true;" onMouseOut="window.status'';return true;"><img src="info_for/peers.gif" width="166" height="22" border="0" name="peers"></a></td>
+</tr> 
+<tr> 
+<td><a HREF="http://www.cs.utk.edu/timetables/fall00/" onMouseOver="option=7; flip('industry'); window.status='Choose an item from the sub-menu'; return true;" onMouseOut="window.status'';return true;"><img src="info_for/industry.gif" width="166" height="20" border="0" name="industry"></a></td>
+</tr>
+<tr>
+<td><a HREF="http://www.cs.utk.edu/timetables/fall00/" onMouseOver="option=8; flip('gov'); window.status='Choose an item from the sub-menu'; return true;" onMouseOut="window.status'';return true;"><img src="info_for/gov.gif"  width="166" height="20" border="0" name="gov"></a></td>
+</tr>
+
+
+  <!--          <a HREF="#" onMouseOver="option=-1; flip('grad');" onMouseOut="swapImage('grad','grad','off');"><img src="images/home_intra.gif" width="187" height="30" border="0" name="grad"></a>-->
+      </table>
+</td>
+</tr>
+      <!-- end of navigation sub table-->
+<tr bgcolor="#ffffff">
+<td height="74" colspan=3><img src="blue_box/white-bottom.gif" width="720" height="74" border="0"></td>
+</tr>
+<tr bgcolor="#ffffff">
+<td align="right" valign="top" colspan=3><font size="1" color="#333399" face="arial, san-serif">Last Updated:</font></td>
+</tr>
+</table>
+    
+<!-- begin maps -->
+<!-- UT hompage map-->
+<map name="utk-home">
+<area shape="rect" coords="11,50,91,103" href="http://www.utk.edu">
+</map>
+
+<!-- end maps -->
+  
+</body>
+</html>
+

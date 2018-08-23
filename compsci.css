@@ -1,0 +1,143 @@
+/* Warning: This page is heavily optimized and represents a working model of all-out style sheet deployment with emphasis on usability and cross-browser compatibility. Do not attempt to modify the style sheet without taking careful notice of the purpose of each attribute and property. Everything is here for a reason, though it may not be visible from one or even two browsers. It is strongly recommended that you contact Michael Dayah (michael@dayah.com) for documentation on the underlying philosophies of this design. */
+
+/*
+Future goals:
+- set only clip width
+- find standardized font names
+- find optimal open/close li structure for lynx
+- pass events down through layers in nav4
+*/
+
+@font-face {
+	font-family: "Caflisch Script";
+	src: url("fonts/CAFLISC0.eot");
+}
+@font-face {
+	font-family: "Engravers Gothic";
+	src: url("fonts/ENGRAVE0.eot");
+}
+BODY {
+	margin: 0;
+	background-color: white;
+}
+UL, .Header, H2 {
+	font-family: "Engravers Gothic", "EngraversGothic BT", "Copperplate Gothic", "avantgarde", "gothic", "sans-serif";
+	font-variant: small-caps;
+}
+H1, H3, ADDRESS, UL UL UL {
+	font-family: "Caflisch Script", "CaflischScript-Regular", "Monotype Corsiva", "zapfchancery", "Lucida Handwriting", "Script", "serif";
+	font-weight: 300;
+}
+UL {
+	margin-left: -5ex;
+	padding-left: 0;
+	font-size: 14px;
+}
+LI {
+	margin-left: 0;
+	padding-left: 6ex;
+	list-style-type: none;
+}
+UL A { text-decoration: none; }
+UL A, ADDRESS, #InformationFor { color: rgb(51, 51, 153); }
+UL UL { margin-bottom: 1ex; }
+UL UL UL {
+	visibility: hidden;
+	background-color: rgb(92, 92, 174);
+	layer-background-color: rgb(92, 92, 174);
+	position: absolute;
+	left: 166px;
+	top: 0;
+	height: 180px;
+	width: 265px;
+	font-variant: normal;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: right;
+	padding: 0.5ex 1em 0.5ex 0;
+	margin: 0;
+	clip: rect(0, 276px, 180px, 0);
+}
+UL UL UL LI { padding-left: 0; }
+A:hover { text-decoration: underline; }
+#BlueBox2 A, UL UL UL A {
+	color: white;
+	text-decoration: none;
+}
+ADDRESS {
+	position: absolute;
+	left: 166px;
+	top: 380px;
+	margin: 1ex;
+	font-size: 16px;
+}
+H1 {
+	color: white;
+	font-size: 24px;
+	margin-top: 0;
+}
+H2 {
+	font-weight: normal;
+	font-size: 16px;
+	word-spacing: 0.5ex;
+}
+H2 SPAN { line-height: 18px; }
+H3 {
+	font-size: 18px;
+	padding-left: 5px;
+}
+H1 SPAN, H2 SPAN, .Header { display: block; }
+.Header {
+	text-shadow: 3px 3px 5px black;
+	font-size: 50px;
+}
+.HideDot { display: none; }
+.News {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 166px;
+	height: 100px;
+	background-color: rgb(255, 153, 0);
+	layer-background-color: rgb(255, 153, 0);
+	clip: rect(0, 166px, 100px, 0);
+	text-align: center;
+}
+.News P {
+	font-family: sans-serif;
+	font-size: 14px;
+	margin-top: 0;
+	padding: 0.5ex;
+}
+#BlueBox {
+	position: absolute;
+	top: 0;
+	left: 166px;
+	width: 554px;
+	background-color: rgb(51, 51, 153);
+	layer-background-color: rgb(51, 51, 153);
+	color: white;
+	text-align: right;
+	padding: 10px 15px;
+	clip: rect(0, 584px, 290px, 0);
+}
+#BlueBox2 {
+	position: absolute;
+	top: 289px;
+	left: 166px;
+	width: 554px;
+	background-color: rgb(51, 51, 153);
+	layer-background-color: rgb(51, 51, 153);
+	color: white;
+	text-align: right;
+	padding: 5px 15px 10px 15px;
+	clip: rect(0, 584px, 80px, 0);
+	z-index: 2;
+}
+#InformationFor {
+	position: absolute;
+	left: 0;
+	top: 100px;
+	z-index: 1;
+}
+DIV#InformationFor { width: 166px; }
